@@ -73,10 +73,33 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseModel.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOApp\BaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOApp\BaseModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ADOApp\Client.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOApp\ClientTag.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOApp\Gender.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOApp\Tag.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOApp\User.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOApp\Visit.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -128,6 +151,12 @@
     <Content Include="ADOApp\BaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BaseModel.Context.cs</LastGenOutput>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="ADOApp\BaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+      <LastGenOutput>BaseModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

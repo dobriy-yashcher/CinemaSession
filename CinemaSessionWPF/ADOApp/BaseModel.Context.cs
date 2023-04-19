@@ -12,19 +12,29 @@ namespace CinemaSessionWPF.ADOApp
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class CinemaSessionEntities : DbContext
     {
+        private static CinemaSessionEntities _context;
+
         public CinemaSessionEntities()
             : base("name=CinemaSessionEntities")
         {
         }
-    
+
+        public static CinemaSessionEntities GetContext()
+        {
+            if (_context == null)
+                _context = new CinemaSessionEntities();
+
+            return _context;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<ClientTag> ClientTag { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
