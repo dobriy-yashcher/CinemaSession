@@ -1,6 +1,4 @@
-﻿using CinemaSessionWPF.Components;
-using CinemaSessionWPF.PagesApp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CinemaSessionWPF
+namespace CinemaSessionWPF.PagesApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AuthorizationPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AuthorizationPage : Page
     {
-        public MainWindow()
+        public AuthorizationPage()
         {
             InitializeComponent();
-            
-            Manager.MainFrame = MainFrame;
-            MainFrame.Navigate(new AuthorizationPage());
         }
     }
 }
