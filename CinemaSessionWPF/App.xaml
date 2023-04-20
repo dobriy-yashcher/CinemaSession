@@ -6,9 +6,30 @@
     <Application.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="Arial"/>
         </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Background" Value="#FFE0DD46"/>
+        </Style>
         <Style TargetType="StackPanel">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="CheckBox">
             <Setter Property="Margin" Value="5"/>
         </Style>
         <Style TargetType="Image">

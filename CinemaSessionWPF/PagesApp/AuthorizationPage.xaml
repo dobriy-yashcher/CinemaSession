@@ -9,9 +9,66 @@
       Title="AuthorizationPage">
 
     <Grid>
-        <TextBlock Text="This is Authoriazation"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="50"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Margin="0 0 0 45">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <TextBlock Text="Логин:"/>
+                    <TextBlock Text="Пароль:"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBox x:Name="TbLogin"/>
+                    <PasswordBox x:Name="TbPassword"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox x:Name="ChbRemember"
+                          VerticalAlignment="Center"
+                          VerticalContentAlignment="Center"
+                          Content="Запомнить"/>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"> 
+                    <!--<TextBlock VerticalAlignment="Center">
+                        <Hyperlink NavigateUri="RegistrationPage.xaml">
+                            Регистрация
+                        </Hyperlink>
+                    </TextBlock>-->
+
+                    <Button x:Name="BtnSignIn" Content="Войти"
+                            HorizontalAlignment="Right"
+                            Click="BtnSignIn_Click"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1"
+                    VerticalAlignment="Bottom">
+            <TextBlock HorizontalAlignment="Center">
+                <Hyperlink NavigateUri="RegistrationPage.xaml">
+                    Регистрация
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </Page>
