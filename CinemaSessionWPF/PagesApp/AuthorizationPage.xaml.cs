@@ -1,6 +1,8 @@
 ﻿using CinemaSessionWPF.ADOApp;
 using CinemaSessionWPF.Components;
 using CinemaSessionWPF.Properties;
+using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -13,39 +15,62 @@ namespace CinemaSessionWPF.PagesApp
     /// </summary>
     public partial class AuthorizationPage : Page
     {
+        const int MaxIncorrectPasswordInputCount = 3;
+        const int BlockInputTimeInMinutes = 1;
+        int _incorrectPasswordInputCount;
+
         public AuthorizationPage()
         {
             InitializeComponent();
+        }
 
-            TbLogin.Text = Settings.Default.LastUser;
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            var loginText = Settings.Default.LastUser;
+            TbLogin.Text = loginText;
+
+            if(loginText != "") 
+                ChbRemember.IsChecked = true;   
         }
 
         private void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder errors = new StringBuilder();
+            /// <summary>
+            /// Проверка блокировки авторизации
+            /// </summary>
+            if (Settings.Default.DateEndBlock > DateTime.Now)
+            {
+                MessageBox.Show("Многократный ввод неккоректных данных" + Environment.NewLine +
+                    $"До разблокировки: {(Settings.Default.DateEndBlock - DateTime.Now).Seconds} секунд",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             /// <summary>
             /// Проверка данных
             /// </summary>
+            StringBuilder errors = new StringBuilder();
+
             if (string.IsNullOrWhiteSpace(TbLogin.Text))
-                errors.AppendLine("Введите логин");
+                errors.AppendLine("Введите логин!");
             if (string.IsNullOrWhiteSpace(TbPassword.Password))
-                errors.AppendLine("Введите пароль");
+                errors.AppendLine("Введите пароль!");
 
             if (errors.Length > 0)
             {
-                MessageBox.Show(errors.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(errors.ToString(), "Ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             /// <summary>
             /// Обработка функции "Запомни меня"
             /// </summary>
-            if (ChbRemember.IsChecked == true) Settings.Default.LastUser = TbLogin.Text;     
+            if (ChbRemember.IsChecked == true) Settings.Default.LastUser = TbLogin.Text;
             else Settings.Default.LastUser = "";
 
             Settings.Default.Save();
-                                           
+
             /// <summary>
             /// Авторизация
             /// </summary>
@@ -54,9 +79,27 @@ namespace CinemaSessionWPF.PagesApp
                 .Where(x => x.Login == TbLogin.Text)
                 .FirstOrDefault();
 
-            if (findUser == null || findUser.Password != TbPassword.Password)
-                MessageBox.Show("Не правильный логин или пароль",
-                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            if (findUser == null)
+            {
+                MessageBox.Show("Неверный логин!", "Ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (findUser.Password != TbPassword.Password)
+            {
+                MessageBox.Show("Неверный пароль!", "Ошибка", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+
+                _incorrectPasswordInputCount ++;
+
+                if (_incorrectPasswordInputCount >= MaxIncorrectPasswordInputCount)
+                {
+                    Settings.Default.DateEndBlock = DateTime.Now.AddMinutes(BlockInputTimeInMinutes);
+                    Settings.Default.Save();
+                    _incorrectPasswordInputCount = 0;
+                }              
+            }
             else
             {
                 MessageBox.Show("Авторизация прошла успешно!",

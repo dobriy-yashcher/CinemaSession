@@ -34,5 +34,16 @@ namespace CinemaSessionWPF.Properties {
                 this["LastUser"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime DateEndBlock {
+            get {
+                return ((global::System.DateTime)(this["DateEndBlock"]));
+            }
+            set {
+                this["DateEndBlock"] = value;
+            }
+        }
     }
 }
