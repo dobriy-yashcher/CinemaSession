@@ -9,8 +9,44 @@
       Title="RegistrationPage">
 
     <Grid>
-        <TextBlock Text="This is registration"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Margin="0 0 0 45">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <TextBlock Text="Логин:"/>
+                    <TextBlock Text="Пароль:"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBox x:Name="TbLogin"/>
+                    <PasswordBox x:Name="TbPassword"/>
+                </StackPanel>
+            </Grid>
+
+            <Button x:Name="BtnSignUp" Content="Зарегистрироваться"
+                    HorizontalAlignment="Center"
+                    Click="BtnSignUp_Click"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1"
+                    VerticalAlignment="Bottom">
+            <TextBlock HorizontalAlignment="Center">
+                <Hyperlink NavigateUri="AuthorizationPage.xaml">
+                    Авторизация
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </Page>
